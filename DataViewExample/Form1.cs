@@ -22,11 +22,11 @@ namespace DataViewExample
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CustomersTableAdapter.Fill(northwindDataSet1.Customers);
-            OrdersTableAdapter.Fill(northwindDataSet1.Orders);
+            CustomersTableAdapter.Fill(NorthwindDataSet.Customers);
+            OrdersTableAdapter.Fill(NorthwindDataSet.Orders);
 
-            customersDataView = new DataView(northwindDataSet1.Customers);
-            ordersDataView = new DataView(northwindDataSet1.Orders);
+            customersDataView = new DataView(NorthwindDataSet.Customers);
+            ordersDataView = new DataView(NorthwindDataSet.Orders);
 
             customersDataView.Sort = "CustomerID";
 
@@ -59,7 +59,7 @@ namespace DataViewExample
         {
             string selectedCustomerID = (string)CustomersGrid.SelectedCells[0].OwningRow.Cells["CustomerID"].Value;
             DataRowView selectedRow = customersDataView[customersDataView.Find(selectedCustomerID)];
-            ordersDataView = selectedRow.CreateChildView(northwindDataSet1.Relations ["FK_Orders_Customers"]);
+            ordersDataView = selectedRow.CreateChildView(NorthwindDataSet.Relations ["FK_Orders_Customers"]);
 
             OrdersGrid.DataSource = ordersDataView;
         }
