@@ -16,11 +16,27 @@ namespace Linq_Student
         };
         static void Main(string[] args)
         {
-            IEnumerable<Student> studentQuery = from student in students where student.Scores[0] > 90 select student;
-            
+            //IEnumerable<Student> studentQuery = from student in students where student.Scores[0] > 90 select student;   Lab7Ex1
+            IEnumerable<Student> studentQuery = from student in students where student.Scores[0] > 90 && student.Scores[3] < 80
+                                                //orderby student.Last ascending
+                                                orderby student.Last descending
+                                                select student;
+
             foreach (Student student in studentQuery)
             {
-                Console.WriteLine("{0}, {1}", student.Last, student.First);
+                //Console.WriteLine("{0}, {1}", student.Last, student.First);   Lab7Ex1
+
+                Console.WriteLine("{0}, {1} {2}", student.Last, student.First, student.Scores[0]);
+            }
+            
+            var studentQuery2 = from student in students group student by student.Last[0];
+            foreach (var studentGroup in studentQuery2)
+            {
+                Console.WriteLine(studentGroup.Key);
+                foreach (Student student in studentGroup)
+                {
+                    Console.WriteLine("   {0}, {1}", student.Last, student.First);
+                }
             }
         }
     }
