@@ -1,5 +1,4 @@
-﻿using DataViewExample.NorthwindDataSetTableAdapters;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace DataViewExample
 {
@@ -22,14 +22,16 @@ namespace DataViewExample
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            CustomersTableAdapter.Fill(NorthwindDataSet.Customers);
-            OrdersTableAdapter.Fill(NorthwindDataSet.Orders);
+            this.ordersTableAdapter1.Fill(this.northwindDataSet1.Orders);
+            this.customersTableAdapter1.Fill(this.northwindDataSet1.Customers);
 
-            customersDataView = new DataView(NorthwindDataSet.Customers);
-            ordersDataView = new DataView(NorthwindDataSet.Orders);
-
+            //CustomersTableAdapter.Fill(northwindDataSet.Customers);
+            //OrdersTableAdapter.Fill(northwindDataSet.Orders);
+            customersDataView = new DataView(northwindDataSet1.Customers);
+            ordersDataView = new DataView(northwindDataSet1.Orders);
+            
             customersDataView.Sort = "CustomerID";
-
+            
             CustomersGrid.DataSource = customersDataView;
         }
 
@@ -58,8 +60,10 @@ namespace DataViewExample
         private void GetOrdersButton_Click(object sender, EventArgs e)
         {
             string selectedCustomerID = (string)CustomersGrid.SelectedCells[0].OwningRow.Cells["CustomerID"].Value;
+
             DataRowView selectedRow = customersDataView[customersDataView.Find(selectedCustomerID)];
-            ordersDataView = selectedRow.CreateChildView(NorthwindDataSet.Relations ["FK_Orders_Customers"]);
+
+            ordersDataView = selectedRow.CreateChildView(northwindDataSet1.Relations ["FK_Orders_Customers"]);
 
             OrdersGrid.DataSource = ordersDataView;
         }

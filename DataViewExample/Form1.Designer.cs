@@ -1,4 +1,6 @@
-﻿namespace DataViewExample
+﻿using System.Threading.Tasks;
+
+namespace DataViewExample
 {
     partial class Form1
     {
@@ -35,19 +37,21 @@
             this.AddRowButton = new System.Windows.Forms.Button();
             this.GetOrdersButton = new System.Windows.Forms.Button();
             this.OrdersGrid = new System.Windows.Forms.DataGridView();
+            this.customersTableAdapter1 = new DataViewExample.NorthwindDataSetTableAdapters.CustomersTableAdapter();
+            this.ordersTableAdapter1 = new DataViewExample.NorthwindDataSetTableAdapters.OrdersTableAdapter();
+            this.northwindDataSet1 = new DataViewExample.NorthwindDataSet();
             ((System.ComponentModel.ISupportInitialize)(this.CustomersGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.northwindDataSet1)).BeginInit();
             this.SuspendLayout();
             // 
             // CustomersGrid
             // 
-            this.CustomersGrid.AllowUserToOrderColumns = true;
             this.CustomersGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.CustomersGrid.Location = new System.Drawing.Point(12, 12);
             this.CustomersGrid.Name = "CustomersGrid";
             this.CustomersGrid.Size = new System.Drawing.Size(377, 426);
             this.CustomersGrid.TabIndex = 0;
-            this.CustomersGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.CustomersGrid_CellContentClick);
             // 
             // SortTextBox
             // 
@@ -103,6 +107,19 @@
             this.OrdersGrid.Size = new System.Drawing.Size(218, 426);
             this.OrdersGrid.TabIndex = 6;
             // 
+            // customersTableAdapter1
+            // 
+            this.customersTableAdapter1.ClearBeforeFill = true;
+            // 
+            // ordersTableAdapter1
+            // 
+            this.ordersTableAdapter1.ClearBeforeFill = true;
+            // 
+            // northwindDataSet1
+            // 
+            this.northwindDataSet1.DataSetName = "NorthwindDataSet";
+            this.northwindDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -120,6 +137,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CustomersGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.OrdersGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.northwindDataSet1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,6 +152,9 @@
         private System.Windows.Forms.Button AddRowButton;
         private System.Windows.Forms.Button GetOrdersButton;
         private System.Windows.Forms.DataGridView OrdersGrid;
+        private NorthwindDataSetTableAdapters.CustomersTableAdapter customersTableAdapter1;
+        private NorthwindDataSetTableAdapters.OrdersTableAdapter ordersTableAdapter1;
+        private NorthwindDataSet northwindDataSet1;
     }
 }
 
